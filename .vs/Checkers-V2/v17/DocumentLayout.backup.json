@@ -1,12 +1,101 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\willb\\Desktop\\Unity\\Checkers\\Checkers-V2\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{99222277-0797-A8E3-3928-25E989D54B4D}|Assembly-CSharp.csproj|c:\\users\\willb\\documents\\unity\\checkers\\checkers-v2\\assets\\scripts\\checkers\\tile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99222277-0797-A8E3-3928-25E989D54B4D}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\checkers\\tile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99222277-0797-A8E3-3928-25E989D54B4D}|Assembly-CSharp.csproj|C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\assets\\scripts\\checkers\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99222277-0797-A8E3-3928-25E989D54B4D}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\checkers\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99222277-0797-A8E3-3928-25E989D54B4D}|Assembly-CSharp.csproj|C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\assets\\scripts\\checkers\\piece.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99222277-0797-A8E3-3928-25E989D54B4D}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\checkers\\piece.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99222277-0797-A8E3-3928-25E989D54B4D}|Assembly-CSharp.csproj|C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\assets\\scripts\\checkers\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99222277-0797-A8E3-3928-25E989D54B4D}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\checkers\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{99222277-0797-A8E3-3928-25E989D54B4D}|Assembly-CSharp.csproj|C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\assets\\scripts\\checkers\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{99222277-0797-A8E3-3928-25E989D54B4D}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\checkers\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Tile.cs",
+              "DocumentMoniker": "C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\Assets\\Scripts\\Checkers\\Tile.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Tile.cs",
+              "ToolTip": "C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\Assets\\Scripts\\Checkers\\Tile.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Checkers\\Tile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T20:22:14.822Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\Assets\\Scripts\\Checkers\\Player.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Player.cs",
+              "ToolTip": "C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\Assets\\Scripts\\Checkers\\Player.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Checkers\\Player.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T20:22:12.978Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Piece.cs",
+              "DocumentMoniker": "C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\Assets\\Scripts\\Checkers\\Piece.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Piece.cs",
+              "ToolTip": "C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\Assets\\Scripts\\Checkers\\Piece.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Checkers\\Piece.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T20:22:10.374Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Game.cs",
+              "DocumentMoniker": "C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\Assets\\Scripts\\Checkers\\Game.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Game.cs",
+              "ToolTip": "C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\Assets\\Scripts\\Checkers\\Game.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Checkers\\Game.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T20:22:08.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Board.cs",
+              "DocumentMoniker": "C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\Assets\\Scripts\\Checkers\\Board.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Board.cs",
+              "ToolTip": "C:\\Users\\Willb\\Documents\\Unity\\Checkers\\Checkers-V2\\Assets\\Scripts\\Checkers\\Board.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Checkers\\Board.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T20:22:05.772Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
