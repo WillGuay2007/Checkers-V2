@@ -1506,6 +1506,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4724954287682756989, guid: da354204079d98949b40968e6a773d3e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6112943361874395514, guid: da354204079d98949b40968e6a773d3e, type: 3}
       propertyPath: m_Name
       value: DarkTile

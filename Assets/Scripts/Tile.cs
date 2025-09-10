@@ -3,10 +3,12 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
 
-    [SerializeField] private Board board;
+    private Board Board;
     private Color DarkTileColor = new Color32(217, 175, 81, 255);
     private Color LightTileColor = new Color32(212, 203, 137, 255);
-    private Color SelectedTileColor = new Color32(0, 200, 0, 255);
+    private Color LegalMoveColor = new Color32(0, 255, 0, 180);
+
+    public Piece OccupyingPiece;
     public int xPosition;
     public int yPosition;
 
@@ -22,11 +24,11 @@ public class Tile : MonoBehaviour
 
     //Ca commence a 1, finit a 5.
     //Cette fonction permet de remettre la couleur originale de la tuile si elle avait été changée avant.
-    private void SetTileOriginalColor()
+    public void ResetColor()
     {
-        if (transform.position.x % 2 == 0) // Si le x est pair
+        if (xPosition % 2 == 0) // Si le x est pair
         {
-            if (transform.position.y % 2 == 0) // Si le y est pair lorsque le x est pair
+            if (yPosition % 2 == 0) // Si le y est pair lorsque le x est pair
             {
                 gameObject.GetComponent<SpriteRenderer>().color = DarkTileColor;
             }
@@ -37,7 +39,7 @@ public class Tile : MonoBehaviour
         }
         else
         {
-            if (transform.position.y % 2 == 0) // Si le y est pair lorsque le x est impair
+            if (yPosition % 2 == 0) // Si le y est pair lorsque le x est impair
             {
                 gameObject.GetComponent<SpriteRenderer>().color = LightTileColor;
             }
@@ -48,30 +50,38 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public bool CheckIfContainsPiece()
+    public void HighlightAsLegalMove()
     {
-        return transform.childCount > 0;
+        gameObject.GetComponent<SpriteRenderer>().color = LegalMoveColor;
     }
 
-    private void OnMouseEnter()
+    public void SetPiece(Piece piece)
     {
-        print("(X: " + xPosition + ", Y: " + yPosition + ")");
-        print(CheckIfContainsPiece());
-        gameObject.GetComponent<SpriteRenderer>().color = SelectedTileColor;
-    }  
+        OccupyingPiece = piece;
+    }
 
-    private void OnMouseExit()
+    public void ClearPiece()
     {
-        SetTileOriginalColor();
+        OccupyingPiece = null;
+    }
+
+    public bool HasPiece()
+    {
+        return OccupyingPiece != null;
+    }
+
+    public void SetBoard(Board BoardToSet)
+    {
+        Board = BoardToSet;
     }
 
     private void OnMouseDown()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = SelectedTileColor * 0.7f;
+        
     }
 
     private void OnMouseUp()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = SelectedTileColor;
+        Board.UpdateSelectedTile(this);
     }
 }
