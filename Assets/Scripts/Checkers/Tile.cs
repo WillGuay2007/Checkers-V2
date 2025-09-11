@@ -1,8 +1,10 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
 
+    public bool PlayerCanSelect;
     private Board Board;
     private Color DarkTileColor = new Color32(217, 175, 81, 255);
     private Color LightTileColor = new Color32(212, 203, 137, 255);
@@ -75,13 +77,9 @@ public class Tile : MonoBehaviour
         Board = BoardToSet;
     }
 
-    private void OnMouseDown()
-    {
-        
-    }
-
     private void OnMouseUp()
     {
+        if (!PlayerCanSelect) return;
         Board.UpdateSelectedTile(this);
     }
 }

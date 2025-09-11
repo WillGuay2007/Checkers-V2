@@ -17,6 +17,7 @@ public class Board : MonoBehaviour
         UnsortedPieces = FindObjectsByType<Piece>(FindObjectsSortMode.None);
         InitializeTiles();
         InitializePieces();
+        EnableTileSelection();
     }
 
     void Update()
@@ -34,6 +35,22 @@ public class Board : MonoBehaviour
 
     public void MovePiece(Piece piece, Tile tile) { 
         piece.SetTile(tile);
+    }
+
+    public void EnableTileSelection() {
+        foreach (Tile tile in UnsortedTiles)
+        {
+            tile.PlayerCanSelect = true;
+        }
+    }
+
+    public void DisableTileSelection()
+    {
+        foreach (Tile tile in UnsortedTiles)
+        {
+            tile.PlayerCanSelect = false;
+            UpdateSelectedTile(null);
+        }
     }
 
     private void ResetAllTiles()
