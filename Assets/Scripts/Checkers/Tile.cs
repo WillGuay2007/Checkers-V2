@@ -14,15 +14,6 @@ public class Tile : MonoBehaviour
     public int xPosition;
     public int yPosition;
 
-    void Start()
-    {  
-    
-    }
-
-    void Update()
-    {
-        
-    }
 
     //Ca commence a 1, finit a 5.
     //Cette fonction permet de remettre la couleur originale de la tuile si elle avait été changée avant.
@@ -66,7 +57,7 @@ public class Tile : MonoBehaviour
     {
         OccupyingPiece = null;
     }
-
+    
     public bool HasPiece()
     {
         return OccupyingPiece != null;
@@ -80,6 +71,18 @@ public class Tile : MonoBehaviour
     private void OnMouseUp()
     {
         if (!PlayerCanSelect) return;
-        Board.UpdateSelectedTile(this);
+
+        //la variable move va te retourner le move si c'est une case légale qui a ete cliquee (de la selected tile du board)
+        Move? move = Board.GetMoveForDestination(this);
+        if (move.HasValue)
+        {
+            Board.MovePiece(move.Value);
+        }
+        else
+        {
+            //Ca va update la selected tile du board si c'est pas un move legal qui a ete cliquee.
+            //La nouvelle selected tile peut etre null ou une tile avec une piece.
+            Board.UpdateSelectedTile(this);
+        }
     }
 }

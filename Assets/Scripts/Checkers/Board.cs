@@ -1,49 +1,185 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Board : MonoBehaviour
 {
-    //Infos: (X,Y) = (1,1) est en haut a gauche
+
+    [SerializeField] private Game game;
+
+    //Infos: (X,Y) = (1,1) est en bas a gauche
     private Tile SelectedTile;
     private Tile[] UnsortedTiles;
-    private Piece[] UnsortedPieces;
+    private List<Piece> UnsortedPieces;
 
     private Tile[,] Tiles = new Tile[6, 6]; // [x,y] de 1 à 5 inclus (L'index 0 est ignoré pour raisons personnelles)
 
-    void Start()
+    void Awake() // Le awake est pour par creer de conflit avec RealPlayer-> enabletileselection quand unsorted tiles peut potentiellement etre null.
     {
         UnsortedTiles = FindObjectsByType<Tile>(FindObjectsSortMode.None);
-        UnsortedPieces = FindObjectsByType<Piece>(FindObjectsSortMode.None);
+        UnsortedPieces = new List<Piece>(FindObjectsByType<Piece>(FindObjectsSortMode.None));
         InitializeTiles();
         InitializePieces();
-        EnableTileSelection();
     }
 
-    void Update()
-    {
-
-    }
-
-    //Appeler de tile -> board
+    //Ca update le selectedtile (la plupart du temps lorsque le joueur clique) et highlight tous les legal moves.
     public void UpdateSelectedTile(Tile NewSelectedTile)
     {
+        if (NewSelectedTile == null)
+        {
+            SelectedTile = null;
+            ResetAllTiles();
+            return;
+        }
+
+        if (NewSelectedTile.HasPiece() && NewSelectedTile.OccupyingPiece.IsOpponent)
+        {
+            return;
+        }
+
         SelectedTile = NewSelectedTile;
         ResetAllTiles();
-        ShowLegalMoves();
-    }
 
-    public void MovePiece(Piece piece, Tile tile) { 
-        piece.SetTile(tile);
-    }
-
-    public void EnableTileSelection() {
-        foreach (Tile tile in UnsortedTiles)
+        if (SelectedTile.HasPiece())
         {
-            tile.PlayerCanSelect = true;
+            List<Move> LegalMoves = GetLegalMovesForPiece(SelectedTile.OccupyingPiece);
+            foreach (Move move in LegalMoves)
+            {
+                move.Destination.HighlightAsLegalMove();
+            }
         }
     }
 
+    //Ca fait le move (deplacement et capture)
+    public void MovePiece(Move move)
+    {
+        move.Piece.SetTile(move.Destination);
+
+        if (!move.Piece.IsKing)
+        {
+            int y = move.Destination.yPosition;
+
+            if (!move.Piece.IsOpponent && y == 5) // Joueur atteint le haut
+            {
+                move.Piece.IsKing = true;
+                print("Un pion du joueur est promu Roi !");
+            }
+            else if (move.Piece.IsOpponent && y == 1) // AI atteint le bas
+            {
+                move.Piece.IsKing = true;
+                print("Un pion de l'AI est promu Roi !");
+            }
+        }
+
+        if (move.IsCapture && move.CapturedPiece != null)
+        {
+
+            Tile capturedTile = move.CapturedPiece.GetTile();
+            capturedTile.ClearPiece();
+
+            UnsortedPieces.Remove(move.CapturedPiece);
+            Destroy(move.CapturedPiece.gameObject);
+
+            List<Move> nextMoves = GetLegalMovesForPiece(move.Piece);
+            bool hasAnotherCapture = false;
+
+            foreach (Move m in nextMoves)
+            {
+                if (m.IsCapture)
+                {
+                    hasAnotherCapture = true;
+                    break;
+                }
+            }
+
+            //Si il n'a pas d'autre captures, il va aller aux 3 dernieres lignes (pour changer de tour). Sinon, il va appeler MovePiece recursivement.
+            if (hasAnotherCapture)
+            {
+                //Capture multiple pour AI
+                if (move.Piece.IsOpponent)
+                {
+                    List<Move> captureMoves = new List<Move>();
+                    foreach (Move m in nextMoves)
+                    {
+                        if (m.IsCapture)
+                            captureMoves.Add(m);
+                    }
+                    if (captureMoves.Count > 0)
+                    {
+                        Debug.Log("AI enchaine une capture");
+                        Move next = captureMoves[Random.Range(0, captureMoves.Count)];
+                        StartCoroutine(ChainAICapture(next));
+                    }
+                    return;
+                }
+                //Capture multiple pour le joueur
+                else
+                {
+                    Debug.Log("Chaîne de capture obligatoire !");
+                    ResetAllTiles();
+
+                    foreach (Tile t in UnsortedTiles)
+                        t.PlayerCanSelect = false;
+
+                    foreach (Move m in nextMoves)
+                    {
+                        if (m.IsCapture)
+                        {
+                            m.Destination.HighlightAsLegalMove();
+                            m.Destination.PlayerCanSelect = true;
+                        }
+                    }
+
+                    return;
+                }
+            }
+
+        }
+
+        ResetAllTiles();
+        SelectedTile = null;
+        game.SwitchTurn();
+    }
+
+    private IEnumerator ChainAICapture(Move nextMove)
+    {
+        yield return new WaitForSeconds(0.5f);
+        MovePiece(nextMove);
+    }
+
+    //Quand c'est le tour du joueur.
+    public void EnableTileSelection()
+    {
+        List<Move> captures = GetAllCaptures(false);
+
+        if (GetAllLegalMovesForPlayer().Count <= 0) {
+            print("The player has lost.");
+            game.EndGame();
+            return; 
+        }
+
+        if (captures.Count > 0)
+        {
+            Debug.Log("Captures obligatoires disponibles");
+            ResetAllTiles();
+
+            foreach (Move m in captures)
+            {
+                m.Destination.HighlightAsLegalMove();
+                m.Destination.PlayerCanSelect = true;
+            }
+        }
+        else
+        {
+            foreach (Tile tile in UnsortedTiles)
+            {
+                tile.PlayerCanSelect = true;
+            }
+        }
+    }
+
+    //Quand c'est le tour de l'AI
     public void DisableTileSelection()
     {
         foreach (Tile tile in UnsortedTiles)
@@ -53,6 +189,89 @@ public class Board : MonoBehaviour
         }
     }
 
+    //Ca regarde si la tuile cliquee (la destination) est un legal move de la tuile selectionee. si oui, ca va le retourner a tuile pour bouger a cette case
+    public Move? GetMoveForDestination(Tile destination)
+    {
+        List<Move> captures = GetAllCaptures(false);
+        if (captures.Count > 0)
+        {
+            foreach (Move move in captures)
+            {
+                if (move.Destination == destination)
+                    return move;
+            }
+            return null;
+        }
+
+        if (SelectedTile == null || !SelectedTile.HasPiece())
+            return null;
+
+        List<Move> legalMoves = GetLegalMovesForPiece(SelectedTile.OccupyingPiece);
+        foreach (Move move in legalMoves)
+        {
+            if (move.Destination == destination)
+                return move;
+        }
+
+        return null;
+    }
+
+    //Ca te donne la piece de la tile selectionée. principalement s'en servir dans les autres classes.
+    public Piece GetSelectedPiece()
+    {
+        return SelectedTile != null ? SelectedTile.OccupyingPiece : null;
+    }
+
+    public List<Move> GetAllLegalMovesForPlayer()
+    {
+        List<Move> moves = new List<Move>();
+
+        foreach (Piece piece in UnsortedPieces)
+        {
+            if (piece == null) continue;
+            if (piece.IsOpponent) continue;
+
+            moves.AddRange(GetLegalMovesForPiece(piece));
+        }
+
+        return moves;
+    }
+
+    //Ca cree une liste de move pour que l'AI fasse son choix dans ceux ci.
+    public List<Move> GetAllLegalMovesForOpponent()
+    {
+        List<Move> moves = new List<Move>();
+
+        foreach (Piece piece in UnsortedPieces)
+        {
+            if (!piece.IsOpponent) continue;
+            moves.AddRange(GetLegalMovesForPiece(piece));
+        }
+
+        return moves;
+    }
+
+    public List<Move> GetAllCaptures(bool forOpponent)
+    {
+        List<Move> captures = new List<Move>();
+
+        foreach (Piece piece in UnsortedPieces)
+        {
+            if (piece == null) continue;
+            if (piece.IsOpponent != forOpponent) continue;
+
+            List<Move> moves = GetLegalMovesForPiece(piece);
+            foreach (Move m in moves)
+            {
+                if (m.IsCapture)
+                    captures.Add(m);
+            }
+        }
+
+        return captures;
+    }
+
+    //Remettre la couleur originale de toutes les tuiles.
     private void ResetAllTiles()
     {
         foreach (Tile tile in UnsortedTiles)
@@ -61,59 +280,86 @@ public class Board : MonoBehaviour
         }
     }
 
-    private void ShowLegalMoves()
+    //Ca te donne une liste de tout les moves possibles d'une piece incluant les captures.
+    private List<Move> GetLegalMovesForPiece(Piece piece)
     {
-        if (SelectedTile == null || !SelectedTile.HasPiece()) {
-            return;
-        } //Vérifier qu'il ya bien une piece sur la tuile sélectionée
+        List<Move> legalMoves = new List<Move>();
+        int X = piece.GetTile().xPosition;
+        int Y = piece.GetTile().yPosition;
 
-        Piece Piece = SelectedTile.OccupyingPiece;
-        int X = SelectedTile.xPosition;
-        int Y = SelectedTile.yPosition;
+        //Cette ligne créé soit un tableau avec les 2 directions si c'est un roi ou un avec une seule direction si c'est un pion.
+        int[] directions = piece.IsKing ? new int[] { +1, -1 } : new int[] { piece.IsOpponent ? -1 : +1 };
 
-        int direction = Piece.IsOpponent ? 1 : -1; //L'adversaire va vers le bas alors que nous allons vers le haut.
-
-        if (X - 1 >= 1 && Y + direction >= 1 && Y + direction <= 5)
+        //Si il ya 2 directions, ca va loop chacunes d'entres elles afin de mettre tous les legal moves.
+        foreach (int direction in directions)
         {
-            //Tuile gauche
-            Tile targetTile = Tiles[X - 1, Y + direction];
-            if (!targetTile.HasPiece())
+            // Gauche
+            if (X - 1 >= 1 && Y + direction >= 1 && Y + direction <= 5)
             {
-                targetTile.HighlightAsLegalMove();
+                Tile targetTile = Tiles[X - 1, Y + direction];
+                if (!targetTile.HasPiece())
+                {
+                    legalMoves.Add(new Move(piece, targetTile));
+                }
+            }
+
+            // Gauche capture
+            if (X - 2 >= 1 && Y + direction * 2 >= 1 && Y + direction * 2 <= 5)
+            {
+                Tile middleTile = Tiles[X - 1, Y + direction];
+                Tile landingTile = Tiles[X - 2, Y + direction * 2];
+                if (middleTile.HasPiece() && !landingTile.HasPiece() && middleTile.OccupyingPiece.IsOpponent != piece.IsOpponent)
+                {
+                    legalMoves.Add(new Move(piece, landingTile, true, middleTile.OccupyingPiece));
+                }
+            }
+
+            // Droite
+            if (X + 1 <= 5 && Y + direction >= 1 && Y + direction <= 5)
+            {
+                Tile targetTile = Tiles[X + 1, Y + direction];
+                if (!targetTile.HasPiece())
+                {
+                    legalMoves.Add(new Move(piece, targetTile));
+                }
+            }
+
+            // Droite capture
+            if (X + 2 <= 5 && Y + direction * 2 >= 1 && Y + direction * 2 <= 5)
+            {
+                Tile middleTile = Tiles[X + 1, Y + direction];
+                Tile landingTile = Tiles[X + 2, Y + direction * 2];
+                if (middleTile.HasPiece() && !landingTile.HasPiece() && middleTile.OccupyingPiece.IsOpponent != piece.IsOpponent)
+                {
+                    legalMoves.Add(new Move(piece, landingTile, true, middleTile.OccupyingPiece));
+                }
             }
         }
 
-        if (X + 1 <= 5 && Y + direction >= 1 && Y + direction <= 5)
-        {
-            //Tuile droite
-            Tile targetTile = Tiles[X + 1, Y + direction];
-            if (!targetTile.HasPiece())
-            {
-                targetTile.HighlightAsLegalMove();
-            }
-        }
-
+        return legalMoves;
     }
 
+    //Je fait le tableau de tiles et je donne la reference de board a chaque tiles.
     private void InitializeTiles()
     {
         foreach (Tile tile in UnsortedTiles)
         {
-            // Convertir position monde -> indices de la grille
+            // convertir la position du monde en grille -> (1,2,3,4,5) avec le +3 comme offset
             tile.xPosition = (int)tile.transform.position.x + 3;
-            tile.yPosition = -(int)tile.transform.position.y + 3;
+            tile.yPosition = (int)tile.transform.position.y + 3;
             tile.SetBoard(this);
 
             Tiles[tile.xPosition, tile.yPosition] = tile;
         }
     }
 
+    //connecter les pièce a leurs tile originale.
     private void InitializePieces()
     {
         foreach (Piece piece in UnsortedPieces)
         {
             int x = (int)piece.transform.position.x + 3;
-            int y = -(int)piece.transform.position.y + 3;
+            int y = (int)piece.transform.position.y + 3;
 
             Tile tile = Tiles[x, y];
             piece.SetTile(tile);

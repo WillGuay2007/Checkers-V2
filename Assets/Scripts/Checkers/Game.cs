@@ -3,11 +3,18 @@ using UnityEngine;
 public class Game : MonoBehaviour
 {
     private Player CurrentPlayer;
-    private bool IsStarted;
+    [SerializeField] private RealPlayer RealPlayer;
+    [SerializeField] private AI AIPlayer;
+
+    void Start()
+    {
+        StartGame();
+    }
 
     public void StartGame()
     {
-
+        CurrentPlayer = RealPlayer;
+        CurrentPlayer.MakeMove();
     }
 
     public void EndGame()
@@ -17,6 +24,14 @@ public class Game : MonoBehaviour
 
     public void SwitchTurn()
     {
+        if (CurrentPlayer == RealPlayer) {
+            CurrentPlayer = AIPlayer;
+        } else
+        {
+            CurrentPlayer = RealPlayer;
+        }
+
+        CurrentPlayer.MakeMove();
 
     }
 
