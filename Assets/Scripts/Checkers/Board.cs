@@ -54,36 +54,48 @@ public class Board : MonoBehaviour
     //Ca fait le move (deplacement et capture)
     public void MovePiece(Move move)
     {
+        //Deplacer la piece avant de gerer la capture
         move.Piece.SetTile(move.Destination);
 
+
+        //Gérer la promotion en roi dans ce bloc de code.
+        //-------------------------------
         if (!move.Piece.IsKing)
         {
             int y = move.Destination.yPosition;
 
             if (!move.Piece.IsOpponent && y == 5) // Joueur atteint le haut
             {
-                move.Piece.IsKing = true;
+                move.Piece.PromoteToKing();
                 print("Un pion du joueur est promu Roi !");
             }
             else if (move.Piece.IsOpponent && y == 1) // AI atteint le bas
             {
-                move.Piece.IsKing = true;
+                move.Piece.PromoteToKing();
                 print("Un pion de l'AI est promu Roi !");
             }
         }
+        //-------------------------------
 
+        //Gérer la capture dans ce bloc de code.
+        //-------------------------------
         if (move.IsCapture && move.CapturedPiece != null)
         {
 
+            //Faire disparaitre la piece capturée
+            //-------
             Tile capturedTile = move.CapturedPiece.GetTile();
             capturedTile.ClearPiece();
 
             UnsortedPieces.Remove(move.CapturedPiece);
             Destroy(move.CapturedPiece.gameObject);
+            //-------
 
+            //Cette ligne marche car la piece a deja ete deplacee avant, donc ca va prendre les legal moves de la nouvelle position.
             List<Move> nextMoves = GetLegalMovesForPiece(move.Piece);
             bool hasAnotherCapture = false;
 
+            //Ca check si il y a une autre capture possible.
             foreach (Move m in nextMoves)
             {
                 if (m.IsCapture)
@@ -109,6 +121,8 @@ public class Board : MonoBehaviour
                     {
                         Debug.Log("AI enchaine une capture");
                         Move next = captureMoves[Random.Range(0, captureMoves.Count)];
+
+                        //Coroutine parce que je veut quil attende pour pas que ca soit instant
                         StartCoroutine(ChainAICapture(next));
                     }
                     return;
@@ -134,8 +148,8 @@ public class Board : MonoBehaviour
                     return;
                 }
             }
-
         }
+        //-------------------------------
 
         ResetAllTiles();
         SelectedTile = null;
@@ -189,7 +203,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    //Ca regarde si la tuile cliquee (la destination) est un legal move de la tuile selectionee. si oui, ca va le retourner a tuile pour bouger a cette case
+    //Ca regarde si la tuile cliquee (la destination) est un legal move de la tuile selectionee. si oui, ca va le retourner le move pour bouger a cette case
     public Move? GetMoveForDestination(Tile destination)
     {
         List<Move> captures = GetAllCaptures(false);

@@ -26,6 +26,17 @@ public class AI : Player
             yield break;
         }
 
+        //Si il ya des captures possibles, changer la liste de moves pour seulement contenir les captures.
+        List<Move> Captures = new List<Move>();
+        foreach (Move move in moves)
+        {
+            if (move.IsCapture) Captures.Add(move);
+        }
+        if (Captures.Count > 0)
+        {
+            moves = Captures;
+        }
+
         Move chosen = moves[Random.Range(0, moves.Count)];
         board.MovePiece(chosen);
     }

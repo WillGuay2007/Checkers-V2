@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
+
     public bool IsOpponent;
     public bool IsKing;
     private Tile currentTile;
+
+    [SerializeField] private GameObject KingSprite;
 
     private void Start()
     {
@@ -26,5 +29,13 @@ public class Piece : MonoBehaviour
     public Tile GetTile()
     {
         return currentTile;
+    }
+
+    public void PromoteToKing()
+    {
+        IsKing = true;
+        GameObject KingSpriteClone = Instantiate(KingSprite, Vector2.zero, Quaternion.identity);
+        KingSpriteClone.transform.SetParent(transform);
+        KingSpriteClone.transform.localPosition = Vector2.zero;
     }
 }
