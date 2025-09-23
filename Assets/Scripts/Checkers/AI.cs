@@ -18,24 +18,14 @@ public class AI : Player
     {
         yield return new WaitForSeconds(0.5f);
 
-        List<Move> moves = board.GetAllLegalMovesForOpponent();
-        if (moves.Count <= 0)
+        if (board.IsInTerminalPosition(true))
         {
             print("AI lost the game.");
             game.EndGame();
             yield break;
         }
 
-        //Si il ya des captures possibles, changer la liste de moves pour seulement contenir les captures.
-        List<Move> Captures = new List<Move>();
-        foreach (Move move in moves)
-        {
-            if (move.IsCapture) Captures.Add(move);
-        }
-        if (Captures.Count > 0)
-        {
-            moves = Captures;
-        }
+        List<Move> moves = board.GetAllLegalMoves(true);
 
         Move chosen = moves[Random.Range(0, moves.Count)];
         board.MovePiece(chosen);

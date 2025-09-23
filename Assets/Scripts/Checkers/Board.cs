@@ -167,12 +167,13 @@ public class Board : MonoBehaviour
     {
         List<Move> captures = GetAllCaptures(false);
 
-        if (GetAllLegalMovesForPlayer().Count <= 0) {
+        if (IsInTerminalPosition(false)) {
             print("The player has lost.");
             game.EndGame();
             return; 
         }
 
+        //Ca va highlight les captures obligatoires si il y en a sans avoir besoin de sélectioner les tuiles.
         if (captures.Count > 0)
         {
             Debug.Log("Captures obligatoires disponibles");
@@ -186,6 +187,7 @@ public class Board : MonoBehaviour
         }
         else
         {
+            //activer la selection de toutes les tuiles.
             foreach (Tile tile in UnsortedTiles)
             {
                 tile.PlayerCanSelect = true;
@@ -203,9 +205,10 @@ public class Board : MonoBehaviour
         }
     }
 
-    //Ca regarde si la tuile cliquee (la destination) est un legal move de la tuile selectionee. si oui, ca va le retourner le move pour bouger a cette case
+    //Regarde si la destination est un move legal de la tuile selectionée. si oui, retourner le move.
     public Move? GetMoveForDestination(Tile destination)
     {
+        //Ce bloc est la pour faire en sorte que si tu clique sur une case legale (qui est une capture), ca va marcher meme si elle n'est pas "l'enfant " de la selectedtile
         List<Move> captures = GetAllCaptures(false);
         if (captures.Count > 0)
         {
@@ -220,6 +223,7 @@ public class Board : MonoBehaviour
         if (SelectedTile == null || !SelectedTile.HasPiece())
             return null;
 
+        //Va seulement chercher dans les legal moves de la piece de la selected tile et non ceux globaux.
         List<Move> legalMoves = GetLegalMovesForPiece(SelectedTile.OccupyingPiece);
         foreach (Move move in legalMoves)
         {
@@ -236,33 +240,26 @@ public class Board : MonoBehaviour
         return SelectedTile != null ? SelectedTile.OccupyingPiece : null;
     }
 
-    public List<Move> GetAllLegalMovesForPlayer()
+    //Note personnelle: si il y'a une capture possible, ca va retourner seulement les captures. Ca se complemente bien avec HasCaptures.
+    public List<Move> GetAllLegalMoves(bool forOpponent)
     {
+        if (HasCaptures(forOpponent))
+            return GetAllCaptures(forOpponent);
+
         List<Move> moves = new List<Move>();
 
         foreach (Piece piece in UnsortedPieces)
         {
-            if (piece == null) continue;
-            if (piece.IsOpponent) continue;
-
+            if (piece.IsOpponent != forOpponent) continue;
             moves.AddRange(GetLegalMovesForPiece(piece));
         }
 
         return moves;
     }
 
-    //Ca cree une liste de move pour que l'AI fasse son choix dans ceux ci.
-    public List<Move> GetAllLegalMovesForOpponent()
+    public bool IsInTerminalPosition(bool forOpponent)
     {
-        List<Move> moves = new List<Move>();
-
-        foreach (Piece piece in UnsortedPieces)
-        {
-            if (!piece.IsOpponent) continue;
-            moves.AddRange(GetLegalMovesForPiece(piece));
-        }
-
-        return moves;
+        return GetAllLegalMoves(forOpponent).Count <= 0;
     }
 
     public List<Move> GetAllCaptures(bool forOpponent)
@@ -283,6 +280,13 @@ public class Board : MonoBehaviour
         }
 
         return captures;
+    }
+
+    public bool HasCaptures(bool forOpponent)
+    {
+        if (GetAllCaptures(forOpponent).Count > 0)
+            return true;
+        return false;
     }
 
     //Remettre la couleur originale de toutes les tuiles.
