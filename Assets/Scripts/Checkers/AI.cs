@@ -30,4 +30,10 @@ public class AI : Player
         Move chosen = moves[Random.Range(0, moves.Count)];
         board.MovePiece(chosen);
     }
+
+    //private Move Minimax(int depth, bool isMaximizing)
+    //{
+        
+    //}
+
 }
