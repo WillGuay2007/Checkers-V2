@@ -22,6 +22,8 @@ public class Piece : MonoBehaviour
         currentTile = tile;
         tile.SetPiece(this);
 
+        if (transform == null)
+            return; // Je crois que je dois faire ca pour la classe de position vu que celle-ci est juste du data et pas de visuel
         transform.SetParent(tile.transform);
         transform.localPosition = Vector3.zero;
     }

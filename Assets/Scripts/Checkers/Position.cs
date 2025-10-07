@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,15 +17,33 @@ public class Position : MonoBehaviour
     Position ParentPosition;
 
     private bool IsTerminalPosition;
-    private bool IsAIToPlay; //White = AI, Pour mon jeu, black va etre le premier a jouer
+    private bool IsAIToPlay = true; //White = AI. De base c'est toujours l'AI qui commence vu que le player va pas minimax. Cette variable existe pour gerer les sub positions
 
     private int PositionEvaluationScore;
+    private int PawnValue = 1;
+    private int KingValue = 3;
+
+    private void Start()
+    {
+        PasteOriginalBoardPosition();
+        //StartCoroutine(PrintBothBoards());
+    }
+
+    IEnumerator PrintBothBoards()
+    {
+        while (true)
+        {
+            print("Number of pieces in the original board: " + VisualGameBoard.UnsortedPieces.Count);
+            print("Number of pieces in the copied board: " + PositionBoardData.UnsortedPieces.Count);
+            yield return new WaitForSeconds(1);
+        }
+    }
 
 
     //Pour quand on créé la position de base
-    public void PasteOriginalBoardPosition(Board board)
+    public void PasteOriginalBoardPosition()
     {
-        PositionBoardData = VisualGameBoard; //A changer pour cloner et non pas juste copier la reference
+        //PositionBoardData = ;
     }
 
     //Parent = la position que cette fonction a été appelé. Chaque child est une variation possible de la position parente
@@ -38,7 +57,7 @@ public class Position : MonoBehaviour
         {
             Position NewChildPosition = new Position(); //Créér une position enfant
             NewChildPosition.ParentPosition = this;
-            NewChildPosition.PositionBoardData = PositionBoardData;
+            //NewChildPosition.PositionBoardData =  //Copier le board de la position parente
             NewChildPosition.IsAIToPlay = !IsAIToPlay; //Changer le tour
 
             //Appliquer le move a la position enfant

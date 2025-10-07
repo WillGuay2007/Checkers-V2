@@ -9,11 +9,11 @@ public class Board : MonoBehaviour
     [SerializeField] private Game game;
 
     //Infos: (X,Y) = (1,1) est en bas a gauche
-    private Tile SelectedTile;
-    private Tile[] UnsortedTiles;
-    private List<Piece> UnsortedPieces;
+    public Tile SelectedTile;
+    public Tile[] UnsortedTiles;
+    public List<Piece> UnsortedPieces;
 
-    private Tile[,] Tiles = new Tile[6, 6]; // [x,y] de 1 à 5 inclus (L'index 0 est ignoré pour raisons personnelles)
+    public Tile[,] Tiles = new Tile[6, 6]; // [x,y] de 1 à 5 inclus (L'index 0 est ignoré pour raisons personnelles)
 
     void Awake() // Le awake est pour par creer de conflit avec RealPlayer-> enabletileselection quand unsorted tiles peut potentiellement etre null.
     {
