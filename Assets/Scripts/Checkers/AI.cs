@@ -21,7 +21,7 @@ public class AI : Player
         if (board.IsInTerminalPosition(true))
         {
             print("AI lost the game.");
-            game.EndGame();
+            StartCoroutine(game.EndGame());
             yield break;
         }
 

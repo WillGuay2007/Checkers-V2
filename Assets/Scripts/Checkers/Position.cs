@@ -14,7 +14,7 @@ public class Position : MonoBehaviour
 
     //J'ai decidé de travailler avec un genre d'arbre. Chaque position a une liste de positions enfants et un parent (Sauf dans des cas ou c'est le debut ou la fin de l'arbre)
     private List<Position> ChildPositions = new List<Position>();
-    Position ParentPosition;
+    private Position ParentPosition;
 
     private bool IsTerminalPosition;
     private bool IsAIToPlay = true; //White = AI. De base c'est toujours l'AI qui commence vu que le player va pas minimax. Cette variable existe pour gerer les sub positions
@@ -23,7 +23,7 @@ public class Position : MonoBehaviour
     private int PawnValue = 1;
     private int KingValue = 3;
 
-    private void Start()
+    void Start()
     {
         PasteOriginalBoardPosition();
         //StartCoroutine(PrintBothBoards());
