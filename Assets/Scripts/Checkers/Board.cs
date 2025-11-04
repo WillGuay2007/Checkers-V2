@@ -169,7 +169,7 @@ public class Board : MonoBehaviour
 
         if (IsInTerminalPosition(false)) {
             print("The player has lost.");
-            game.EndGame();
+            StartCoroutine(game.EndGame());
             return; 
         }
 
@@ -284,9 +284,7 @@ public class Board : MonoBehaviour
 
     public bool HasCaptures(bool forOpponent)
     {
-        if (GetAllCaptures(forOpponent).Count > 0)
-            return true;
-        return false;
+        return GetAllCaptures(forOpponent).Count > 0;
     }
 
     //Remettre la couleur originale de toutes les tuiles.

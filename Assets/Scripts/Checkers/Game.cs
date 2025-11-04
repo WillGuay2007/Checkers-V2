@@ -1,4 +1,8 @@
+using System.Collections;
+using UnityEditor.Build.Content;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
@@ -17,9 +21,11 @@ public class Game : MonoBehaviour
         CurrentPlayer.MakeMove();
     }
 
-    public void EndGame()
+    public IEnumerator EndGame()
     {
-
+        print("Returning to menu...");
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void SwitchTurn()
@@ -35,10 +41,6 @@ public class Game : MonoBehaviour
 
     }
 
-    public void CheckIfWinner()
-    {
-
-    }
 
     private void DisplayWinner()
     {
