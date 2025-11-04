@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\William Guay\\Unity\\Checkers\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{653C4D46-4EF4-D168-E6D6-6199E72F48EE}|Assembly-CSharp.csproj|d:\\william guay\\unity\\checkers\\assets\\scripts\\mainmenu\\menuhud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{653C4D46-4EF4-D168-E6D6-6199E72F48EE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mainmenu\\menuhud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{653C4D46-4EF4-D168-E6D6-6199E72F48EE}|Assembly-CSharp.csproj|d:\\william guay\\unity\\checkers\\assets\\scripts\\checkers\\position.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{653C4D46-4EF4-D168-E6D6-6199E72F48EE}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\checkers\\position.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -51,6 +55,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MenuHUD.cs",
+              "DocumentMoniker": "D:\\William Guay\\Unity\\Checkers\\Assets\\Scripts\\MainMenu\\MenuHUD.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MainMenu\\MenuHUD.cs",
+              "ToolTip": "D:\\William Guay\\Unity\\Checkers\\Assets\\Scripts\\MainMenu\\MenuHUD.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MainMenu\\MenuHUD.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-04T17:59:04.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Position.cs",
               "DocumentMoniker": "D:\\William Guay\\Unity\\Checkers\\Assets\\Scripts\\Checkers\\Position.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Position.cs",
@@ -63,7 +80,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Tile.cs",
               "DocumentMoniker": "D:\\William Guay\\Unity\\Checkers\\Assets\\Scripts\\Checkers\\Tile.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Tile.cs",
@@ -75,7 +92,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "RealPlayer.cs",
               "DocumentMoniker": "D:\\William Guay\\Unity\\Checkers\\Assets\\Scripts\\Checkers\\RealPlayer.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\RealPlayer.cs",
@@ -87,7 +104,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Player.cs",
               "DocumentMoniker": "D:\\William Guay\\Unity\\Checkers\\Assets\\Scripts\\Checkers\\Player.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Player.cs",
@@ -99,7 +116,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Piece.cs",
               "DocumentMoniker": "D:\\William Guay\\Unity\\Checkers\\Assets\\Scripts\\Checkers\\Piece.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Piece.cs",
@@ -111,7 +128,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Move.cs",
               "DocumentMoniker": "D:\\William Guay\\Unity\\Checkers\\Assets\\Scripts\\Checkers\\Move.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Move.cs",
@@ -123,7 +140,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Game.cs",
               "DocumentMoniker": "D:\\William Guay\\Unity\\Checkers\\Assets\\Scripts\\Checkers\\Game.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Game.cs",
@@ -135,7 +152,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Board.cs",
               "DocumentMoniker": "D:\\William Guay\\Unity\\Checkers\\Assets\\Scripts\\Checkers\\Board.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Board.cs",
@@ -143,12 +160,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Checkers\\Board.cs",
               "ViewState": "AgIAACEAAAAAAAAAAAAowBYAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T16:51:01.979Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-16T16:51:01.979Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "AI.cs",
               "DocumentMoniker": "D:\\William Guay\\Unity\\Checkers\\Assets\\Scripts\\Checkers\\AI.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\AI.cs",
