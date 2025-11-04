@@ -56,7 +56,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Position.cs",
               "ToolTip": "D:\\William Guay\\Unity\\Checkers\\Assets\\Scripts\\Checkers\\Position.cs",
               "RelativeToolTip": "Assets\\Scripts\\Checkers\\Position.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAQwB0AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-30T17:46:40.936Z",
               "EditorCaption": ""
@@ -71,8 +71,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Checkers\\Tile.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T16:51:16.141Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-16T16:51:16.141Z"
             },
             {
               "$type": "Document",
@@ -84,8 +83,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Checkers\\RealPlayer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T16:51:13.757Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-16T16:51:13.757Z"
             },
             {
               "$type": "Document",
@@ -97,8 +95,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Checkers\\Player.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T16:51:12.095Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-16T16:51:12.095Z"
             },
             {
               "$type": "Document",
@@ -110,8 +107,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Checkers\\Piece.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T16:51:08.892Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-16T16:51:08.892Z"
             },
             {
               "$type": "Document",
@@ -123,8 +119,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Checkers\\Move.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T16:51:06.805Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-16T16:51:06.805Z"
             },
             {
               "$type": "Document",
@@ -136,8 +131,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Checkers\\Game.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAwwCYAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-16T16:51:05.153Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-16T16:51:05.153Z"
             },
             {
               "$type": "Document",
@@ -147,7 +141,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Checkers\\Board.cs",
               "ToolTip": "D:\\William Guay\\Unity\\Checkers\\Assets\\Scripts\\Checkers\\Board.cs",
               "RelativeToolTip": "Assets\\Scripts\\Checkers\\Board.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBYAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAowBYAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-16T16:51:01.979Z",
               "EditorCaption": ""

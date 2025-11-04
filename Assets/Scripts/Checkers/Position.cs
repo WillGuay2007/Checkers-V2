@@ -25,11 +25,11 @@ public class Position : MonoBehaviour
 
     private void Start()
     {
-        PasteOriginalBoardPosition();
+        //PasteOriginalBoardPosition();
         //StartCoroutine(PrintBothBoards());
     }
 
-    IEnumerator PrintBothBoards()
+    IEnumerator PrintBothBoards() //J'avais fait cette fonction pour m'aider a debugger le clonage du board
     {
         while (true)
         {
@@ -43,7 +43,7 @@ public class Position : MonoBehaviour
     //Pour quand on créé la position de base
     public void PasteOriginalBoardPosition()
     {
-        //PositionBoardData = ;
+        //PositionBoardData = ; Je trouve pas comment cloner un board j'ai essayé plusieurs facons mais aucun resultat
     }
 
     //Parent = la position que cette fonction a été appelé. Chaque child est une variation possible de la position parente
@@ -60,7 +60,7 @@ public class Position : MonoBehaviour
             //NewChildPosition.PositionBoardData =  //Copier le board de la position parente
             NewChildPosition.IsAIToPlay = !IsAIToPlay; //Changer le tour
 
-            //Appliquer le move a la position enfant
+            //Appliquer le move a la position enfant. J'aurai du mieux adapter movepiece pour quil soit plus compatible avec cette clase
             NewChildPosition.PositionBoardData.MovePiece(move);
 
             NewChildPosition.GenerateChilds(); //Récursivité (continuer tant que c'est pas une position terminale)
@@ -74,7 +74,7 @@ public class Position : MonoBehaviour
 
     }
 
-    public void EvaluatePosition()
+    public void EvaluatePosition() //Si j'aurai pu cloner le board, j'aurai eu de la facilité a faire cette fonction
     {
 
     }
